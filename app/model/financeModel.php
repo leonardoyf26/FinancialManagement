@@ -43,18 +43,29 @@ class FinanceModel{
     //Function that searches for an element in the database and returns its index.
     public function find($date, $hour){
         $data = $this->readDatabase();
-        $transaction = $data['transaction'];
+        $transaction = $data['transaction'] ?? [];
 
-            echo "\n\n\n{$date}";
-
-
-        for ($i=0; $i < count($data['transaction']); $i++) { 
+        for ($i=0; $i < count($transaction); $i++) { 
             if($transaction[$i]['date'] == $date && $transaction[$i]['hour'] == $hour){
                 return $i;
             }
         }
-        
+
         return -1;
+    }
+
+    //Function that removes an element in the database.
+    public function removeValue($date, $hour){
+        $section = 'transaction';
+        $data = $this->readDataBase();
+
+        if (!isset($data[$section]) || !is_array($data[$section])) {
+            $data[$section] = [];
+        }
+
+        $remove_index = $this->find($date, $hour);  
+        array_splice($data[$section], $remove_index, 1);
+        $this->writeDataBase($data);
     }
 }
 

@@ -47,8 +47,6 @@ $model->insertValue([
     "hour"  => date("H:i:s")
 ]);
 
-// -----------------------------------------
-
 // Read again for confirmation
 $data_after = $model->readDatabase();
 $transaction_after = $data_after['transaction'];
@@ -58,10 +56,22 @@ foreach($transaction_after as $t){
     echo "{$t['value']}\n";
 }
 
-
+//-----------------------------------------
 // Testing find() function
 $j = $model->find("2025-11-20", "14:32:10");
 echo "\n\n\n\n{$transaction_after[$j]['value']}";
+
+//-----------------------------------------
+// Testing find() function
+$model->removeValue("2025-11-24", "17:40:47");
+
+$data_after_after = $model->readDatabase();
+$transaction_after_after = $data_after_after['transaction'];
+
+echo "\nData base after second update:\n";
+foreach($transaction_after_after as $t){
+    echo "{$t['value']}\n";
+}
 
 ?>
 
