@@ -10,7 +10,7 @@ $data = $model->readDatabase();
 // Extract the transaction list
 $transaction = $data['transaction'];
 
-echo "<pre>Banco antes:\n";
+echo "<pre>Data base:\n";
 foreach($transaction as $t){
     echo "{$t['value']}\n"; 
 }
@@ -18,7 +18,7 @@ foreach($transaction as $t){
 // -----------------------------------------
 // Add a new entry to 'transaction'
 $transaction[] = [
-    "value" => 123.45,
+    "value" => 1000.87,
     "date"  => date("Y-m-d"),
     "hour"  => date("H:i:s")
 ];
@@ -33,9 +33,34 @@ $model->writeDatabase($data);
 $data_after = $model->readDatabase();
 $transaction_after = $data_after['transaction'];
 
-echo "\nBanco depois:\n";
+echo "\nData base after first update:\n";
+foreach($transaction_after as $t){
+    echo "{$t['value']}\n";
+}
+
+// -----------------------------------------
+// Using function insert()
+
+$model->insertValue('transaction', [
+    "value" => 84.1,
+    "date"  => date("Y-m-d"),
+    "hour"  => date("H:i:s")
+]);
+
+// -----------------------------------------
+
+// Read again for confirmation
+$data_after = $model->readDatabase();
+$transaction_after = $data_after['transaction'];
+
+echo "\nData base after second update:\n";
 foreach($transaction_after as $t){
     echo "{$t['value']}\n";
 }
 
 ?>
+
+
+
+?>
+
