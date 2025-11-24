@@ -41,7 +41,7 @@ foreach($transaction_after as $t){
 // -----------------------------------------
 // Using function insert()
 
-$model->insertValue('transaction', [
+$model->insertValue([
     "value" => 84.1,
     "date"  => date("Y-m-d"),
     "hour"  => date("H:i:s")
@@ -58,9 +58,10 @@ foreach($transaction_after as $t){
     echo "{$t['value']}\n";
 }
 
-?>
 
-
+// Testing find() function
+$j = $model->find("2025-11-20", "14:32:10");
+echo "\n\n\n\n{$transaction_after[$j]['value']}";
 
 ?>
 
