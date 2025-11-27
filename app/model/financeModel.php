@@ -42,7 +42,7 @@ class FinanceModel{
 
     //Function that searches for an element in the database and returns its index.
     public function find($date, $hour){
-        $data = $this->readDatabase();
+        $data = $this->readDataBase();
         $transaction = $data['transaction'] ?? [];
 
         for ($i=0; $i < count($transaction); $i++) { 
@@ -63,9 +63,12 @@ class FinanceModel{
             $data[$section] = [];
         }
 
-        $remove_index = $this->find($date, $hour);  
-        array_splice($data[$section], $remove_index, 1);
-        $this->writeDataBase($data);
+        $remove_index = $this->find($date, $hour);
+        if($remove_index != -1){
+            array_splice($data[$section], $remove_index, 1);
+            $this->writeDataBase($data);
+        }  
+        
     }
 }
 

@@ -40,7 +40,6 @@ foreach($transaction_after as $t){
 
 // -----------------------------------------
 // Using function insert()
-
 $model->insertValue([
     "value" => 84.1,
     "date"  => date("Y-m-d"),
@@ -62,7 +61,7 @@ $j = $model->find("2025-11-20", "14:32:10");
 echo "\n\n\n\n{$transaction_after[$j]['value']}";
 
 //-----------------------------------------
-// Testing find() function
+// Testing remove() function
 $model->removeValue("2025-11-24", "17:40:47");
 
 $data_after_after = $model->readDatabase();
